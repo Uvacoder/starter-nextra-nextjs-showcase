@@ -1,0 +1,28 @@
+# Bundlers
+
+Showcase has first class support for Vite. It's the default bundler for Showcase.
+
+## Vite
+
+By default, Showcase uses [Vite](https://github.com/vitejs/vite) to display bundle your components. To change the Vite configuration, use the `viteFinal` property in your `.showcase/config.mjs`:
+
+```js
+export default {
+  bundler: {
+    viteFinal: (config) => {
+      let config = config;
+      // do something with the config
+      config.plugins.push(yourOwnPlugin());
+      return config;
+    }
+  },
+};
+```
+
+## Webpack
+
+Webpack support is in the works. This doesn't mean that you can't make Showcase work. If your project uses Webpack with `babel-loader` or `ts-loader`, Showcase may work right out of box. If you're using a custom Babel plugin, you can customize Showcase's Babel configuration using the `viteFinal` property.
+
+## Next.js
+
+Next.js support is in the works. Next uses Webpack with SWC under the hood, so you can expect this feature to be stable around the same time as Webpack.
