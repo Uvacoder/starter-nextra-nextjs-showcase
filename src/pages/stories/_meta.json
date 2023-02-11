@@ -1,0 +1,11 @@
+{
+  "quickstart": {
+    "title": "Quickstart"
+  },
+  "args": {
+    "title": "Args (Controls)"
+  },
+  "decorators": {
+    "title": "Decorators"
+  }
+}

@@ -1,0 +1,30 @@
+# Stories
+
+By default, Showcase searches for stories in the format of `src/**/*.stories.{js,jsx,ts,tsx}`. You can change this by setting the `stories` property in your `.showcase/config.mjs` file.
+
+```tsx
+export default {
+  stories: 'src/**/*.stories.{js,jsx,ts,tsx}',
+} 
+```
+
+## Creating Stories
+
+Showcase uses [CSF](https://github.com/ComponentDriven/csf) (Component Story Format) to define stories. This is the same format used by Storybook and Ladle. However, not all features of CSF are supported.
+
+### Basic Example
+
+```tsx
+import { ComponentMeta, ComponentStory } from "@showcasejs/react";
+
+import { Button } from './Button';
+
+export default {
+  title: 'Button',
+  component: Button,
+} as ComponentMeta<typeof Button>;
+
+export const Primary: ComponentStory<typeof Button> = () => <Button>Primary</Button>;
+```
+
+Much of the syntax is the same as Storybook.

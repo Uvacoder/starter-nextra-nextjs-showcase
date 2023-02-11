@@ -1,0 +1,56 @@
+# Decorators
+
+Just like Storybook, all decorators will run in the order they are defined in the following order:
+
+- Global
+- Component
+- Story
+
+## Global Decorators
+
+Global decorators are defined in the `.showcase/preview.js` file.
+
+```tsx
+import { ThemeProvider } from "@primer/react";
+
+export const decorators = [
+  (Story) => (
+    <ThemeProvider>
+      <Story />
+    </ThemeProvider>
+  ),
+];
+```
+
+## Component Decorators
+
+```tsx
+import { Button, ThemeProvider } from "@primer/react";
+import { ComponentMeta } from "@showcasejs/react";
+
+export default {
+  title: "Button",
+  component: Button,
+  decorators: [
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
+} as ComponentMeta<typeof Button>;
+```
+
+## Story Decorators
+
+```tsx
+export const Primary = () => <Button>Primary</Button>;
+
+Primary.decorators = [
+  (Story) => (
+    <ThemeProvider>
+      <Story />
+    </ThemeProvider>
+  ),
+];
+```
