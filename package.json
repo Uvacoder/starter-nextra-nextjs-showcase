@@ -1,0 +1,85 @@
+{
+  "name": "@showcasejs/cli",
+  "version": "0.0.1",
+  "description": "A next-generation React stories framework",
+  "author": "Alex Yuan",
+  "repository": "github:yuan-alex/showcase",
+  "type": "module",
+  "main": "./dist/api/api.js",
+  "exports": {
+    "require": "./dist/api/api.cjs",
+    "import": "./dist/api/api.js"
+  },
+  "types": "./dist/api/api.d.ts",
+  "keywords": [
+    "cli",
+    "react",
+    "stories",
+    "storybook"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.16"
+  },
+  "bin": {
+    "showcase": "./dist/cli/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "preinstall": "mkdir ./dist/dist;echo \"#! /usr/bin/env node\" > ./dist/cli/cli.js",
+    "dev:cli": "pnpm build:cli --watch",
+    "dev:renderer": "concurrently \"pnpm vite\" \"pnpm build:renderer:windi --dev\"",
+    "start:renderer": "concurrently \"vite ./dist/renderer --config=./vite.config.mts\" \"pnpm build:renderer:windi --dev\"",
+    "build": "pnpm build:api && pnpm build:cli && pnpm build:renderer",
+    "build:api": "tsup ./src/api/api.ts --clean --format=cjs,esm --target=es2015 --out-dir=dist/api --dts",
+    "build:cli": "tsup-node ./src/cli/cli.mts --clean --format=esm --target=node14 --out-dir=dist/cli",
+    "build:renderer": "tsx ./scripts/build-renderer.mts && pnpm build:renderer:windi",
+    "build:renderer:windi": "windicss ./src/renderer/**/*.tsx --preflight --output ./dist/renderer/public/static/windi.css",
+    "cli": "node ./dist/cli/cli.js"
+  },
+  "peerDependencies": {
+    "react": ">=16.14.0",
+    "react-dom": ">=16.14.0"
+  },
+  "dependencies": {
+    "@componentdriven/csf": "0.0.2-alpha.0",
+    "@heroicons/react": "^2.0.14",
+    "@showcasejs/react": "workspace:*",
+    "@swc/core": "^1.3.32",
+    "@uiw/react-codemirror": "^4.19.7",
+    "@vitejs/plugin-react": "^3.1.0",
+    "boxen": "^7.0.1",
+    "chalk": "^5.2.0",
+    "chokidar": "^3.5.3",
+    "fs-extra": "^11.1.0",
+    "globby": "^13.1.3",
+    "handlebars": "^4.7.7",
+    "playwright": "^1.30.0",
+    "prop-types": "^15.8.1",
+    "react-colorful": "^5.6.1",
+    "react-error-boundary": "^3.1.4",
+    "react-router-dom": "^6.8.1",
+    "react-shadow": "^20.0.0",
+    "vite": "^4.1.1",
+    "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.1",
+    "@types/node": "^18.11.19",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/yargs": "^17.0.22",
+    "autoprefixer": "^10.4.13",
+    "concurrently": "^7.6.0",
+    "esbuild": "^0.17.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "^6.5.0",
+    "tsx": "^3.12.3",
+    "typescript": "^4.9.5",
+    "vite-plugin-inspect": "^0.7.15",
+    "windicss": "^3.5.6"
+  }
+}
