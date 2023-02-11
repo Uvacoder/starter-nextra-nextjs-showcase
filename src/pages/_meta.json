@@ -1,0 +1,24 @@
+{
+  "index": {
+    "title": "Showcase.js",
+    "theme": {
+      "breadcrumb": false,
+      "footer": false,
+      "sidebar": true,
+      "toc": false,
+      "pagination": true
+    }
+  },
+  "quickstart": {
+    "title": "Quickstart"
+  },
+  "configuration": {
+    "title": "Configuration"
+  },
+  "stories": {
+    "title": "Stories"
+  },
+  "visual-regression-testing": {
+    "title": "Visual Regression Testing"
+  }
+}

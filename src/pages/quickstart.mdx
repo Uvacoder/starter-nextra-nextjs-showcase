@@ -1,0 +1,33 @@
+import { Tab, Tabs } from 'nextra-theme-docs'
+
+# Install Showcase.js
+
+Showcase includes two packages, one for the CLI, and another for a React types.
+
+## Install packages
+
+```bash
+# pnpm
+pnpm add @showcasejs/cli @showcasejs/react
+
+# npm
+npm i @showcasejs/cli @showcasejs/react
+
+# yarn
+yarn add @showcasejs/cli @showcasejs/react
+```
+
+Showcase treats `react` and `react-dom` as peer-dependencies supporting versions `>=16.14.0`.
+
+## Run showcase
+
+Add a new command to your `package.json` scripts:
+
+```bash
+"scripts": {
+  "showcase": "showcase dev"
+}
+```
+
+Then run `npm run showcase` or `yarn showcase` to start the development server.
+
