@@ -1,0 +1,52 @@
+# Introduction
+
+Visual Regression Testing is a testing method to ensure your components don't change when you don't want them to. In each new PR, a screenshot of each story is taken and the ones that have changed are displayed for manual review.  This is helpful when your codebase becomes very large and a manual review of your stories' changes isn't feasable.
+
+## Default implementation
+
+The default implementation uses Playwright to automate a Chromium browser to take a screenshot of each story in each of the default viewports and have them inserted into the `.showcase/snapshots` folder.
+
+To get started, simply run:
+
+```bash
+showcase create-snapshots
+```
+
+## Custom implementation
+
+If you want to use another browser automation tool or upload your screenshots into your private S3 bucket, you can do that as well. Showcase outputs a story metadata file in `.showcase/meta.json` that lists all the stories in the your project. Start a dev instance and screenshot all stories with your custom implementation.
+
+You can generate an up-to-date `meta.json` file using the `showcase create-meta` command.
+
+
+```typescript
+import fs from "node:fs";
+import playwright from "playwright";
+
+export const createSnapshots = async () => {
+  const meta = JSON.parse(fs.readFileSync(".showcase/meta.json"));
+
+  const browser = await playwright.chromium.launch();
+  const page = await browser.newPage();
+
+  for (const componentName of Object.keys(meta.components)) {
+    for (const storyName of meta.components[componentName].stories) {
+      await page.goto(
+        `http://localhost:6006/stories/${componentName}--${storyName}/preview`,
+      );
+
+      // or your custom screenshot implementation
+      await page.screenshot({
+        path: path.join(
+          process.cwd(),
+          `your-custom-folder/${componentName}/${storyName}/chromium.png`,
+        ),
+      });
+    }
+  }
+
+  await browser.close();
+};
+
+createSnapshots();
+```
