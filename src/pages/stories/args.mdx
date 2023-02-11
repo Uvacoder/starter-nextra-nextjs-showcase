@@ -1,0 +1,39 @@
+# Args
+
+Showcase supports args in the same format as Storybook. Use the `argTypes` property to define controls at the component or story level.
+
+```tsx
+import { Button } from "@primer/react";
+import { ComponentMeta, ComponentStory } from "@showcasejs/react";
+
+export default {
+  title: "Button",
+  component: Button,
+  decorators: [
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
+  argTypes: {
+    variant: {
+      control: {
+        type: "select",
+        options: ["small", "medium", "large"],
+      },
+    },
+  },
+} as ComponentMeta<typeof Button>;
+
+export const Primary: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+
+Primary.argTypes = {
+  variant: {
+    control: {
+    type: "select",
+      options: ["small", "medium", "large"],
+    },
+  },
+}
+```
